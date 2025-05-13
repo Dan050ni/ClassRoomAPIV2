@@ -11,18 +11,16 @@ import java.util.List;
 public class Teacher {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column (name = "id_teacher")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_teacher")
     private int idTeacher;
 
-    @Column(length = 100,nullable = false)
-    private String Specialism;
+    @Column(length = 100, nullable = false)
+    private String specialism;
 
     @OneToMany(mappedBy = "teacher")
-    @JsonManagedReference/*para eliminar el enum, este es el que va en OneToMany*/
+    @JsonManagedReference
     private List<Course> courses;
-
-
 
     @ManyToOne
     @JoinColumn(name = "id_user", referencedColumnName = "id_user")
@@ -33,7 +31,7 @@ public class Teacher {
 
     public Teacher(int idTeacher, String specialism) {
         this.idTeacher = idTeacher;
-        Specialism = specialism;
+        this.specialism = specialism;
     }
 
     public int getIdTeacher() {
@@ -45,10 +43,26 @@ public class Teacher {
     }
 
     public String getSpecialism() {
-        return Specialism;
+        return specialism;
     }
 
     public void setSpecialism(String specialism) {
-        Specialism = specialism;
+        this.specialism = specialism;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

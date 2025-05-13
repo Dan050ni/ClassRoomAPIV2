@@ -15,17 +15,18 @@ public class SchoolClass {
     @Column(name = "id_class")
     private String idClass;
 
-    @Column(length = 1000,nullable = false)
-    private String Name;
+    @Column(length = 1000, nullable = false)
+    private String name;  // Cambié "Name" a "name" para seguir la convención de nomenclatura en Java
 
-    @OneToMany(mappedBy = "class")
+    @OneToMany(mappedBy = "schoolClass")  // Asegúrate de que la propiedad en Course también sea "schoolClass"
     @JsonBackReference
     private List<Course> courses;
-    public SchoolClass(){}
+
+    public SchoolClass() {}
 
     public SchoolClass(String idClass, String name) {
         this.idClass = idClass;
-        Name = name;
+        this.name = name;
     }
 
     public String getIdClass() {
@@ -37,10 +38,10 @@ public class SchoolClass {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 }

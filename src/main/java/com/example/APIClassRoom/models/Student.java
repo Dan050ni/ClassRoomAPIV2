@@ -1,9 +1,7 @@
 package com.example.APIClassRoom.models;
 
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
 
 import java.util.List;
 
@@ -25,8 +23,6 @@ public class Student {
     @Column(nullable = true, length = 255)
     private String Adress;
 
-
-
     @ManyToOne
     @JoinColumn(name = "id_user", referencedColumnName = "id_user", nullable = false)
     private User user;
@@ -43,10 +39,11 @@ public class Student {
     @JsonManagedReference
     private List<Registration> registrations;
 
-
-    public Student(){
+    // Constructor vacío requerido por JPA
+    public Student() {
     }
 
+    // Constructor personalizado
     public Student(int idStudent, String adress, String birthdate, int grade) {
         this.idStudent = idStudent;
         this.Adress = adress;
@@ -54,6 +51,7 @@ public class Student {
         this.Grade = grade;
     }
 
+    // Getters y setters
     public int getIdStudent() {
         return idStudent;
     }
@@ -86,4 +84,35 @@ public class Student {
         Grade = grade;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Qualification> getQualifications() {
+        return qualifications;
+    }
+
+    public void setQualifications(List<Qualification> qualifications) {
+        this.qualifications = qualifications;
+    }
+
+    public List<Attendance> getAttendances() {
+        return attendances;
+    }
+
+    public void setAttendances(List<Attendance> attendances) {
+        this.attendances = attendances;
+    }
+
+    public List<Registration> getRegistrations() {
+        return registrations;
+    }
+
+    public void setRegistrations(List<Registration> registrations) {
+        this.registrations = registrations;
+    }
 }

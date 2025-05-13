@@ -4,11 +4,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
-import javax.security.auth.Subject;
 import java.util.List;
 
 @Entity
-@Table(name = "Courses")
 public class Course {
 
     @Id
@@ -16,24 +14,23 @@ public class Course {
     @Column(name = "id_course")
     private Integer idCourse;
 
-    @Column(length = 100,nullable = false)
-    private String Name;
+    @Column(length = 100, nullable = false)
+    private String name;
 
     @ManyToOne
-    @JoinColumn(name = "id_class", referencedColumnName = "id_class")  // Relación con Class
+    @JoinColumn(name = "id_class", referencedColumnName = "id_class")  // Relación con SchoolClass
     @JsonBackReference
-    private SchoolClass classroom;  // Cambié el nombre de "class" a "classroom" para evitar conflictos con la palabra reservada
-
+    private SchoolClass schoolClass;  // Esta propiedad debería ser "schoolClass" para que coincida con el "mappedBy" en SchoolClass
 
     @ManyToOne
-    @JoinColumn(name = "fk_teacher",referencedColumnName = "id_tecaher")
-    @JsonBackReference/*referencia del manytoone*/
-            Teacher teacher;
+    @JoinColumn(name = "fk_teacher", referencedColumnName = "id_teacher")
+    @JsonBackReference
+    private Teacher teacher;
 
-
-    @OneToMany(mappedBy = "course")
-    @JsonManagedReference
-    private List<Subject> subjects;
+    // Eliminamos las siguientes líneas que hacen referencia a "Subject"
+    // @OneToMany(mappedBy = "course")
+    // @JsonManagedReference
+    // private List<Subject> subjects;
 
     @OneToMany(mappedBy = "course")
     @JsonManagedReference
@@ -47,26 +44,36 @@ public class Course {
     @JsonManagedReference
     private List<Registration> registrations;
 
-    public Course(){}
+    public Course() {}
 
     public Course(Integer idCourse, String name) {
         this.idCourse = idCourse;
-        Name = name;
+        this.name = name;
     }
+
+    // Getters y Setters
 
     public Integer getIdCourse() {
         return idCourse;
     }
 
-    public void setIdCourse(int idCourse) {
+    public void setIdCourse(Integer idCourse) {
         this.idCourse = idCourse;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
+    }
+
+    public SchoolClass getSchoolClass() {
+        return schoolClass;
+    }
+
+    public void setSchoolClass(SchoolClass schoolClass) {
+        this.schoolClass = schoolClass;
     }
 }

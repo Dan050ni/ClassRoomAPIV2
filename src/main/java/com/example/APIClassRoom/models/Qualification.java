@@ -8,16 +8,15 @@ import jakarta.persistence.*;
 public class Qualification {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column (name = "id_qualification")
-    private String idQualification;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_qualification")
+    private Integer idQualification;  // Cambié el tipo de String a Integer por convenciones estándar
 
-    @Column (nullable = false)
-    private Float Note;
+    @Column(nullable = false)
+    private Float note;  // Cambié "Note" a "note" para seguir la convención
 
-    @Column (name = "evaluation_date",nullable = false)
-    private String EvaluationDate;
-
+    @Column(name = "evaluation_date", nullable = false)
+    private String evaluationDate;  // Cambié "EvaluationDate" a "evaluationDate" para seguir la convención
 
     @ManyToOne
     @JoinColumn(name = "id_student", referencedColumnName = "id_student")
@@ -29,37 +28,35 @@ public class Qualification {
     @JsonBackReference
     private Course course;
 
+    public Qualification() {}
 
-
-    public Qualification(){}
-
-    public Qualification(String idQualification, Float note, String evaluationDate) {
+    public Qualification(Integer idQualification, Float note, String evaluationDate) {  // Cambié el tipo del id a Integer
         this.idQualification = idQualification;
-        Note = note;
-        EvaluationDate = evaluationDate;
+        this.note = note;
+        this.evaluationDate = evaluationDate;
     }
 
-    public String getIdQualification() {
+    public Integer getIdQualification() {
         return idQualification;
     }
 
-    public void setIdQualification(String idQualification) {
+    public void setIdQualification(Integer idQualification) {
         this.idQualification = idQualification;
     }
 
     public Float getNote() {
-        return Note;
+        return note;
     }
 
     public void setNote(Float note) {
-        Note = note;
+        this.note = note;
     }
 
     public String getEvaluationDate() {
-        return EvaluationDate;
+        return evaluationDate;
     }
 
     public void setEvaluationDate(String evaluationDate) {
-        EvaluationDate = evaluationDate;
+        this.evaluationDate = evaluationDate;
     }
 }

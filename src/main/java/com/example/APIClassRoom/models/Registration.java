@@ -2,6 +2,7 @@ package com.example.APIClassRoom.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import java.time.LocalDateTime;  // Importado para manejar fechas correctamente
 
 @Entity
 @Table(name = "Registrations")
@@ -13,7 +14,7 @@ public class Registration {
     private Integer idRegistration;
 
     @Column(name = "registration_date", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private String registrationDate;
+    private LocalDateTime registrationDate;  // Usé LocalDateTime para almacenar la fecha y hora correctamente
 
     @ManyToOne
     @JoinColumn(name = "id_student", referencedColumnName = "id_student")
@@ -27,7 +28,7 @@ public class Registration {
 
     public Registration() {}
 
-    public Registration(int idRegistration, String registrationDate) {
+    public Registration(Integer idRegistration, LocalDateTime registrationDate) {  // Cambié el tipo de fecha a LocalDateTime
         this.idRegistration = idRegistration;
         this.registrationDate = registrationDate;
     }
@@ -40,15 +41,15 @@ public class Registration {
         this.idRegistration = idRegistration;
     }
 
-    public String getRegistrationDate() {
+    public LocalDateTime getRegistrationDate() {  // Cambié el tipo a LocalDateTime
         return registrationDate;
     }
 
-    public void setRegistrationDate(String registrationDate) {
+    public void setRegistrationDate(LocalDateTime registrationDate) {  // Cambié el tipo a LocalDateTime
         this.registrationDate = registrationDate;
     }
 
-    // 🚀 Agregado:
+    // Métodos getter y setter para las relaciones con Student y Course
     public Student getStudent() {
         return student;
     }

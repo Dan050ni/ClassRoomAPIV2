@@ -9,16 +9,15 @@ import jakarta.persistence.*;
 public class Attendance {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_attendances")
     private Integer idAttendance;
 
-    @Column (nullable = false)
-    private String Date;
+    @Column(nullable = false)
+    private String date;  // Cambié "Date" por "date" siguiendo la convención
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private Status status;
-
 
     @ManyToOne
     @JoinColumn(name = "id_student", referencedColumnName = "id_student")
@@ -30,14 +29,12 @@ public class Attendance {
     @JsonBackReference
     private Course course;
 
-
-
     public Attendance() {
     }
 
     public Attendance(Integer idAttendance, String date, Status status) {
         this.idAttendance = idAttendance;
-        Date = date;
+        this.date = date;
         this.status = status;
     }
 
@@ -50,11 +47,11 @@ public class Attendance {
     }
 
     public String getDate() {
-        return Date;
+        return date;
     }
 
     public void setDate(String date) {
-        Date = date;
+        this.date = date;
     }
 
     public Status getStatus() {
@@ -63,5 +60,21 @@ public class Attendance {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

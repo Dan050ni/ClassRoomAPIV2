@@ -3,7 +3,6 @@ package com.example.APIClassRoom.models;
 import com.example.APIClassRoom.helpers.UserType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
 
 @Entity
 @Table(name = "Users")
@@ -27,6 +26,7 @@ public class User {
     private String phone;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private UserType userType;
 
     @OneToOne(mappedBy = "user")
@@ -37,7 +37,7 @@ public class User {
     @JsonBackReference
     private Teacher teacher;
 
-    public User(){
+    public User() {
     }
 
     public User(Integer id, String name, String email, String password, String phone, UserType userType) {
@@ -49,7 +49,7 @@ public class User {
         this.userType = userType;
     }
 
-
+    // Getters y Setters
     public Integer getId() {
         return id;
     }
@@ -98,6 +98,19 @@ public class User {
         this.userType = userType;
     }
 
+    public Student getStudent() {
+        return student;
+    }
 
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
 }
